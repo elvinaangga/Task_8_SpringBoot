@@ -10,8 +10,7 @@ import java.util.Optional;
 public interface UserDao {
         List<User> findAll();
         Optional<User> findById(Long id);
-        User save(User user);
-        User update(User user);
+        void save(User user);
         void delete(Long id);
     }
 

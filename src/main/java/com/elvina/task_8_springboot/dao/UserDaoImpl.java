@@ -29,15 +29,14 @@ import java.util.Optional;
 
         @Override
         @Transactional
-        public User save(User user) {
-            entityManager.persist(user);
-            return user;
-        }
-
-        @Override
-        @Transactional
-        public User update(User user) {
-            return entityManager.merge(user);
+        public void save(User user) {
+            if (user.getId() == null) {
+                // entity baru
+                entityManager.persist(user);
+            } else {
+                // update entity lama
+                entityManager.merge(user);
+            }
         }
 
         @Override
