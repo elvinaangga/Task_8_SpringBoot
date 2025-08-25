@@ -41,6 +41,12 @@ import java.util.Optional;
 
         @Override
         @Transactional
+        public void update(User user) {
+            entityManager.merge(user);
+    }
+
+        @Override
+        @Transactional
         public void delete(Long id) {
             User user = entityManager.find(User.class, id);
             if (user != null) {

@@ -49,6 +49,19 @@ import java.util.stream.Collectors;
 
         @Override
         @Transactional
+        public void update(User user) {
+            Set<ConstraintViolation<User>> violations = validator.validate(user);
+            if (!violations.isEmpty()) {
+                String messages = violations.stream()
+                        .map(ConstraintViolation::getMessage)
+                        .collect(Collectors.joining(", "));
+                throw new RuntimeException("Validation failed: " + messages);
+            }
+            userDao.update(user);
+        }
+
+        @Override
+        @Transactional
         public void delete(Long id) {
             userDao.delete(id);
 

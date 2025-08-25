@@ -175,7 +175,7 @@
         </tbody>
     </table>
 
-    <div class="empty-state" id="emptyState">
+    <div th:if="${#lists.isEmpty(users)}" class="empty-state" id="emptyState">
         <h3>No Users Found</h3>
         <p>Click "Add New User" to create your first user.</p>
     </div>
